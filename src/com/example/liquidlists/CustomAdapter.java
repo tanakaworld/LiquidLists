@@ -31,7 +31,6 @@ public class CustomAdapter extends ArrayAdapter<String> {
 		ViewHolder holder;
 		View view = convertView;
 
-		// Viewを再利用している場合は新たにViewを作らない
 		if (view == null) {
 			inflater = (LayoutInflater) getContext().getSystemService(
 					Context.LAYOUT_INFLATER_SERVICE);
@@ -45,11 +44,10 @@ public class CustomAdapter extends ArrayAdapter<String> {
 		}
 
 		// 特定の行のデータを取得
-		String str = getItem(position);
+		String text = getItem(position);
 
-		if (!TextUtils.isEmpty(str)) {
-			// テキストビューにラベルをセット
-			holder.labelText.setText(str);
+		if (!TextUtils.isEmpty(text)) {
+			holder.labelText.setText(text);
 		}
 
 		// 行毎に背景色を変える
@@ -59,10 +57,8 @@ public class CustomAdapter extends ArrayAdapter<String> {
 			holder.labelText.setBackgroundColor(Color.parseColor("#880000"));
 		}
 
-		// XMLで定義したアニメーションを読み込む
 		Animation anim = AnimationUtils.loadAnimation(getContext(),
 				R.anim.item_motion);
-		// リストアイテムのアニメーションを開始
 		view.startAnimation(anim);
 
 		return view;
